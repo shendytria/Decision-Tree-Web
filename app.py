@@ -101,8 +101,8 @@ def upload_file():
         # We'll show the processed features for samples (since model uses them).
         X_train_sample_html = pd.DataFrame(X_train).head(10).to_html(classes='table table-striped', index=False)
         X_test_sample_html = pd.DataFrame(X_test).head(10).to_html(classes='table table-striped', index=False)
-        y_train_sample_html = pd.DataFrame(X_train).head(10).to_html(classes='table table-striped', index=False)
-        y_test_sample_html = pd.DataFrame(X_test).head(10).to_html(classes='table table-striped', index=False)
+        y_train_sample_html = pd.DataFrame(y_train).head(10).to_html(classes='table table-striped', index=False)
+        y_test_sample_html = pd.DataFrame(y_test).head(10).to_html(classes='table table-striped', index=False)
        
         # ---- Train Decision Tree ----
         dt_classifier = DecisionTreeClassifier(max_depth=6, random_state=42)
@@ -114,6 +114,10 @@ def upload_file():
         # ---- Predict on X_test ----
         y_pred = dt_classifier.predict(X_test)
         global_y_pred = y_pred
+
+        y_pred_html = pd.DataFrame({'Predicted (y_pred)': y_pred[:10]}).to_html(
+        classes='table table-striped', index=False
+    )
 
         # ---- Metrics ----
         acc = accuracy_score(y_test, y_pred)
@@ -166,7 +170,7 @@ def upload_file():
             X_test_sample_html=X_test_sample_html,
             y_train_sample_html=y_train_sample_html,
             y_test_sample_html=y_test_sample_html,
-            y_pred=list(y_pred),
+            y_pred_html=y_pred_html,
             accuracy=round(acc * 100, 2),
             class_report=class_rep,
             confusion_matrix=cm.tolist(),
