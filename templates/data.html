@@ -202,8 +202,11 @@
                 <div class="wrap-anywhere">
                     {{ y_test_sample_html | safe }}
                 </div>
-                <h3 class="font-medium text-gray-700 mt-2">y_pred (sample)</h3>
-                <pre class="bg-gray-50 p-2 rounded wrap-anywhere">{{ y_pred }}</pre>
+                <h3 class="font-medium text-gray-700 mt-2">Prediksi (y_pred)</h3>
+                <div class="overflow-x-auto wrap-anywhere">
+                    {{ y_pred_html | safe }}
+                </div>
+
             </div>
 
             <!-- Accuracy -->
